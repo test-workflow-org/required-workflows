@@ -18,8 +18,6 @@ jobs:
         with:
           actions: 'find-issues'
           token: ${{ secrets.GITHUB_TOKEN }}
-          title-includes: 'this'
-          labels: 'documentation'
       - run: |
           echo $issues
       
