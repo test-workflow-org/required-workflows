@@ -20,4 +20,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - run: |
           echo $issues
+          echo "The current issues are: ${{ steps.print-issues.outputs.issues }}"
       
