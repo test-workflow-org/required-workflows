@@ -1,0 +1,18 @@
+name: find all issues
+
+jobs:
+  print-issues:
+    name: print_issues
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Find issues"
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'find-issues'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title-includes: 'this'
+          labels: 'documentation'
+      - run: |
+          echo $issues
+      
