@@ -1,5 +1,12 @@
 name: find all issues
 
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+      - master
+
 jobs:
   print-issues:
     name: print_issues
