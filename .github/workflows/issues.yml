@@ -10,9 +10,7 @@ on:
 jobs:
   print-issues:
     name: print_issues
-    permissions:
-      - write-all
-      - read-all
+    permissions: write-all,read-all
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
