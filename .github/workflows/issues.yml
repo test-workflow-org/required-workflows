@@ -34,7 +34,7 @@ jobs:
           script: |
             const issues = ${{ steps.alerts.outputs.data }}
             console.log({length: issues.length});
-            await github.issues.createComment({
+            await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
