@@ -33,7 +33,7 @@ jobs:
             if (issues.length == 0) {
               message = `Your repository has no critical alert :tada:`;
             } else {
-              message = `Your repository has ${issues.length} critical alerts! please address those first.
+              message = `Your repository has ${issues.length} critical alerts! please address those first.`
               failed = true;
             }
             await github.rest.issues.createComment({
@@ -42,6 +42,5 @@ jobs:
               repo: context.repo.repo,
               body: message
             });
-            
             // exit with an error code if failed is true
 
