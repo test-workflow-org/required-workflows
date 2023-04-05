@@ -13,13 +13,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: "Find issues"
-        id: issues
-        uses: actions-cool/issues-helper@v3
+#      - name: "Find issues"
+#        id: issues
+#        uses: actions-cool/issues-helper@v3
+#        with:
+#          actions: 'find-issues'
+#          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: octokit/request-action@v2.x
+        id: alerts
         with:
-          actions: 'find-issues'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          route: GET /repos/{repo}/dependabot/alerts
+          repo: ${{ github.repository}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
-          echo $issues
-          echo "The current issues are: ${{ steps.issues.outputs.issues }}"
+          echo "The current response is: ${{ steps.alerts.outputs.data }}"
       
