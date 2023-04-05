@@ -29,4 +29,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
       - run: |
           echo "The current response is: ${{ steps.alerts.outputs.data }}"
-      
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const issues = ${{ steps.alerts.outputs.data }}
+            console.log({length: issues.length});
+            await github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'How many critical dependabot alerts do you have?'
+            })
+
