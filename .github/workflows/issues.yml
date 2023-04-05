@@ -31,12 +31,23 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
+            // if PR is labeled as dependencies, skip 
             const issues = ${{ steps.alerts.outputs.data }}
             console.log({length: issues.length});
+            let message = "";
+            let failed = false;
+            if (issues.length == 0) {
+              message = `Your repository has no critical alert :tada:`;
+            } else {
+              message = `Your repository has ${issues.length} critical alerts! please address those first.
+              failed = true;
+            }
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'How many critical dependabot alerts do you have?'
-            })
+              body: message
+            });
+            
+            // exit with an error code if failed is true
 
