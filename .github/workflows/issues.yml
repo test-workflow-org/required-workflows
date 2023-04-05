@@ -23,8 +23,8 @@ jobs:
       - uses: octokit/request-action@v2.x
         id: alerts
         with:
-          route: GET /repos/test-workflow-org/product1/dependabot/alerts?state=open&severity=critical
-#          repo: ${{ github.repository }}
+          route: GET /repos/{repo}/dependabot/alerts?state=open&severity=critical
+          repo: ${{ github.repository }}
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
       - run: |
